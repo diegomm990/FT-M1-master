@@ -37,8 +37,8 @@ class Queue {
   constructor() {
     this.queue = [];
   }
-  enqueue(valor) {
-    this.queue.push(valor);
+  enqueue(value) {
+    this.queue.push(value);
   }
   size() {
     return this.queue.length;
