@@ -16,7 +16,16 @@ const {
 
 var countArray = function(array) {
     // Tu código aca:
-    
+    let suma = 0;
+    for(let i = 0; i < array.length; i++) {
+        if(!Array.isArray(array[i])) {
+            suma = suma + array[i];
+        } else {
+            let suma2 = countArray(array[i]);
+            suma = suma + suma2;
+        }
+    }
+    return suma;
 }
 
 
@@ -39,7 +48,14 @@ var countArray = function(array) {
 
 var countProps = function(obj) {
     // Tu código aca:
-
+    let contador = 0;
+    for (const prop in obj) {
+        if(typeof obj[prop] === 'object' && !Array.isArray(obj[prop])){
+            contador = contador + countProps(obj[prop]);
+        }
+    contador++;
+    }
+    return contador;
 }
 
 
@@ -53,7 +69,16 @@ var countProps = function(obj) {
 
 LinkedList.prototype.changeNotNumbers = function(){
     // Tu código aca:
-
+    var current = this.head;
+    var contador = 0;
+    while(current){
+        if(isNaN(Number(current.value))){
+            current.value = "Kiricocho";
+            contador++;
+        }
+        current = current.next;
+    }
+    return contador;
 }
 
 
@@ -67,7 +92,12 @@ LinkedList.prototype.changeNotNumbers = function(){
 
 var mergeQueues = function(queueOne, queueTwo) {
     // Tu código aca:
-
+    let newQ = new Queue();
+    while(queueOne.size() || queueTwo.size()) {
+        if(queueOne.size()) newQ.enqueue(queueOne.dequeue());
+        if(queueTwo.size()) newQ.enqueue(queueTwo.dequeue());
+    }
+    return newQ
 }
 
 
@@ -82,14 +112,19 @@ var mergeQueues = function(queueOne, queueTwo) {
 
 var closureMult = function(multiplier) {
     // Tu código aca:
-
+    return function(numero){
+        return numero * multiplier;
+    }
 }
 
 // Implementar el método sum dentro del prototype de BinarySearchTree
 // que debe retornar la suma total de los valores dentro de cada nodo del arbol
 BinarySearchTree.prototype.sum = function() {
     // Tu código aca:
-
+    suma = this.value;
+    if(this.left) suma = suma + this.left.sum();
+    if(this.right) suma = suma + this.right.sum();
+    return suma;
 }
 
 module.exports = {
